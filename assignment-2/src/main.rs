@@ -77,7 +77,18 @@ fn main() {
     println!("BEFORE: {:?}", buyer_group);
 
     let buyer_idx: usize = buyer_group.find_buyer(PaymentType::Cash) as usize;
-    buyer_group.buy(buyer_idx, &seller);
+    if buyer_idx > 0 {
+        buyer_group.buy(buyer_idx, &seller);
+        println!("AFTER: {:?}", buyer_group);
+    };
+    
 
-    println!("AFTER: {:?}", buyer_group);
+
+    // Check if can still use PaymentType after this
+    let b2_idx = buyer_group.find_buyer(PaymentType::DigitalToken);
+
+    let b2 = &buyer_group.members[b2_idx as usize];
+
+    println!("{:?}", b2);
+
 }
